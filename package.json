@@ -1,0 +1,21 @@
+{
+  "name": "chrome-ext-suumo-filter",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel": "^6.3.26",
+    "babel-core": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-util": "^3.0.7"
+  },
+  "description": "[Sakharov's Akihabara report](http://www2s.biglobe.ne.jp/~sakharov/) has a long history and it is a really useful for cheking (rowest/average) prices for computer components. But that page does not have a good stylesheet for Google Chrome on Mac. So this script just add a style element which sets `Courier` as a `font-family` for price table elements.",
+  "version": "0.0.1",
+  "main": "gulpfile.babel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hiroyuki Shirakawa",
+  "license": "MIT License"
+}

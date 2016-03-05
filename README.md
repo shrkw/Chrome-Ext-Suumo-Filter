@@ -1,0 +1,2 @@
+# Suumo excluding filter
+
