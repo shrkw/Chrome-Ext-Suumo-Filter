@@ -25,10 +25,14 @@ gulp.task('manifest', () => {
   gulp.src('src/manifest.json')
     .pipe(gulp.dest(dest_dir));
 });
+gulp.task('vendor', () => {
+  gulp.src('vendor/*')
+    .pipe(gulp.dest(dest_dir));
+});
 
 gulp.task('resources', () => {
   gulp.src('resources/*')
     .pipe(gulp.dest(dest_dir + 'resources'));
 });
 
-gulp.task('default', ['watch', 'compile-js', 'manifest', 'resources']);
+gulp.task('default', ['watch', 'compile-js', 'manifest', 'resources', 'vendor']);

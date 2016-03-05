@@ -19,7 +19,7 @@
   "content_scripts": [
     {
       "matches": ["http://suumo.jp/*"],
-      "js": ["app.js"],
+      "js": ["jquery-2.2.1.min.js", "app.js"],
       "run_at": "document_end"
     }
   ]
