@@ -1,0 +1,17 @@
+button.shrkw-excluding {
+  margin-top: 10px;
+  padding: 10px 3px;
+  border-radius: 6px;
+  background-color: #FCFCFC;
+}
+
+button.shrkw-clear {
+  margin-top: 10px;
+  padding: 10px 3px;
+  border-radius: 6px;
+  background-color: #FCFCFC;
+}
+
+div.shrkw-hide {
+  opacity: 0.1;
+}

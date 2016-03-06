@@ -18,7 +18,7 @@ gulp.task('compile-js', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['./src/**/*'], ['compile-js']);
+  gulp.watch(['./src/**/*'], ['build']);
 });
 
 gulp.task('manifest', () => {
@@ -35,4 +35,6 @@ gulp.task('resources', () => {
     .pipe(gulp.dest(dest_dir + 'resources'));
 });
 
-gulp.task('default', ['watch', 'compile-js', 'manifest', 'resources', 'vendor']);
+gulp.task('build', ['compile-js', 'manifest', 'resources', 'vendor']);
+
+gulp.task('default', ['watch', 'build']);

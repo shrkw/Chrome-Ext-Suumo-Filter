@@ -20,6 +20,7 @@
     {
       "matches": ["http://suumo.jp/*"],
       "js": ["jquery-2.2.1.min.js", "app.js"],
+      "css": ["resources/style.css"],
       "run_at": "document_end"
     }
   ]
