@@ -1,5 +1,6 @@
 dest
 vendor
+build
 
 # Created by https://www.gitignore.io/api/node,vim,osx
 
