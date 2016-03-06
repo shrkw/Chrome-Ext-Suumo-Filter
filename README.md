@@ -1,6 +1,7 @@
 Suumo excluding filter
 ===========================
 
+https://chrome.google.com/webstore/detail/suumo-properties-filter/mhigijcmdomdgemlkmhanebgdfjfglio
 
 Development
 ----------------
