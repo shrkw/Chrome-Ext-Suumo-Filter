@@ -2,22 +2,26 @@ import gulp from 'gulp'
 import util from 'gulp-util'
 import babel from 'gulp-babel'
 import zip from 'gulp-zip'
-import jeditor from 'gulp-json-editor'
-
+import del from 'del'
 import fs from 'fs'
+import jeditor from 'gulp-json-editor'
+import runSequence from 'run-sequence'
+// import rename from 'gulp-rename'
+// import uglify from 'gulp-uglify'
 
-const dest_dir = 'dest/';
+
+const dist_dir = './dist/';
 const version = (() => {
-  const json = JSON.parse(fs.readFileSync('./package.json'));
+  const json = JSON.parse(fs.readFileSync('package.json'));
   return json.version;
 })();
 const name = (() => {
-  const json = JSON.parse(fs.readFileSync('./package.json'));
+  const json = JSON.parse(fs.readFileSync('package.json'));
   return json.name;
 })();
 
 gulp.task('compile-js', () => {
-  gulp.src("./src/**/*.{js,jsx}")
+  gulp.src("src/**/*.{js,jsx}")
     .pipe(babel())
     .on('error', (err) => {
       util.log(
@@ -26,32 +30,43 @@ gulp.task('compile-js', () => {
       );
       gulp.emit('end');
     })
-    .pipe(gulp.dest(dest_dir));
+    .pipe(gulp.dest(dist_dir));
 });
 
 
 gulp.task('watch', () => {
-  gulp.watch(['./src/**/*'], ['build']);
+  gulp.watch(['src/**/*', 'resources/**/*'], ['build']);
 });
 
 
 gulp.task('manifest', () => {
   return gulp.src('src/manifest.json')
     .pipe(jeditor({ version: version }))
-    .pipe(gulp.dest(dest_dir));
+    .pipe(gulp.dest(dist_dir));
 });
 gulp.task('vendor', () => {
   gulp.src('vendor/*')
-    .pipe(gulp.dest(dest_dir));
+    .pipe(gulp.dest(dist_dir));
 });
 
 gulp.task('resources', () => {
   gulp.src('resources/*')
-    .pipe(gulp.dest(dest_dir + 'resources'));
+    .pipe(gulp.dest(dist_dir + 'resources'));
+});
+
+gulp.task('clean', () => {
+  del.sync(['dist/**/*']);
+});
+  // due to prevent 'Error: EEXIST: file already exists'
+gulp.task('pack', () => {
+  runSequence('clean',
+    'build',
+    'zip'
+  );
 });
 
 gulp.task('zip', ['build'], function (cb) {
-  return gulp.src('dest/**/*')
+  return gulp.src('dist/**/*')
       .pipe(zip(`${name}-${version}.zip`))
       .pipe(gulp.dest('build'));
 })
