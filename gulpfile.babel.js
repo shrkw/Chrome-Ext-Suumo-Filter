@@ -2,15 +2,20 @@ import gulp from 'gulp'
 import util from 'gulp-util'
 import babel from 'gulp-babel'
 import zip from 'gulp-zip'
+import plumber from "gulp-plumber"
 import del from 'del'
 import fs from 'fs'
+import browserify from "browserify"
+import babelify from "babelify"
+import through2 from 'through2'
 import jeditor from 'gulp-json-editor'
 import runSequence from 'run-sequence'
 // import rename from 'gulp-rename'
 // import uglify from 'gulp-uglify'
 
-
-const dist_dir = './dist/';
+const path_map = {
+  dest_dir: './dist/',
+};
 const version = (() => {
   const json = JSON.parse(fs.readFileSync('package.json'));
   return json.version;
@@ -20,7 +25,27 @@ const name = (() => {
   return json.name;
 })();
 
-gulp.task('compile-js', () => {
+gulp.task('babelify', () => {
+  gulp.src('src/**/*.js')
+    .pipe(plumber())
+    .pipe(through2.obj((file, encode, callback) => {
+      browserify(file.path, { debug: true })
+        .transform(babelify)
+        .bundle((err, res) => {
+        if (err) { return callback(err); }
+        file.contents = res;
+        callback(null, file);
+      }).on("error", (err) => {
+        util.log(
+          util.colors.red('Error'),
+          `${err.message}\n${err.codeFrame}`
+        );
+      });
+    }))
+    .pipe(gulp.dest(path_map.dest_dir));
+});
+
+gulp.task('babel', () => {
   gulp.src("src/**/*.{js,jsx}")
     .pipe(babel())
     .on('error', (err) => {
@@ -30,28 +55,22 @@ gulp.task('compile-js', () => {
       );
       gulp.emit('end');
     })
-    .pipe(gulp.dest(dist_dir));
+    .pipe(gulp.dest(path_map.dest_dir));
 });
-
-
-gulp.task('watch', () => {
-  gulp.watch(['src/**/*', 'resources/**/*'], ['build']);
-});
-
 
 gulp.task('manifest', () => {
   return gulp.src('src/manifest.json')
     .pipe(jeditor({ version: version }))
-    .pipe(gulp.dest(dist_dir));
+    .pipe(gulp.dest(path_map.dest_dir));
 });
 gulp.task('vendor', () => {
   gulp.src('vendor/*')
-    .pipe(gulp.dest(dist_dir));
+    .pipe(gulp.dest(path_map.dest_dir));
 });
 
 gulp.task('resources', () => {
   gulp.src('resources/*')
-    .pipe(gulp.dest(dist_dir + 'resources'));
+    .pipe(gulp.dest(`${path_map.dest_dir}/resources`));
 });
 
 gulp.task('clean', () => {
@@ -71,6 +90,10 @@ gulp.task('zip', ['build'], function (cb) {
       .pipe(gulp.dest('build'));
 })
 
-gulp.task('build', ['compile-js', 'manifest', 'resources', 'vendor']);
+gulp.task('watch', () => {
+  gulp.watch(['src/**/*', 'resources/**/*'], ['build']);
+});
+
+gulp.task('build', ['babelify', 'manifest', 'resources', 'vendor']);
 
 gulp.task('default', ['watch', 'build']);
