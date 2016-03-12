@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import * as lib from './mylib'
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {

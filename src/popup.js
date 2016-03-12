@@ -1,3 +1,6 @@
+import $ from 'jquery'
+import Mustache from 'mustache'
+
 const template = $('#tmpl').html();
 Mustache.parse(template);
 

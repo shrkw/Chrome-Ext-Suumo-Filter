@@ -63,10 +63,6 @@ gulp.task('manifest', () => {
     .pipe(jeditor({ version: version }))
     .pipe(gulp.dest(path_map.dest_dir));
 });
-gulp.task('vendor', () => {
-  gulp.src('vendor/*')
-    .pipe(gulp.dest(path_map.dest_dir));
-});
 
 gulp.task('resources', () => {
   gulp.src('resources/*')
@@ -94,6 +90,6 @@ gulp.task('watch', () => {
   gulp.watch(['src/**/*', 'resources/**/*'], ['build']);
 });
 
-gulp.task('build', ['babelify', 'manifest', 'resources', 'vendor']);
+gulp.task('build', ['babelify', 'manifest', 'resources']);
 
 gulp.task('default', ['watch', 'build']);
