@@ -12,7 +12,7 @@ chrome.storage.local.get('excluding', (ret)=> {
     const rendered = $(Mustache.render(template, {value: val}));
     rendered.find(".action").on("click", (event)=> {
       lib.removeExcludingWord(event.target.dataset.val);
-      event.target.remove();
+      $(event.target).parents("tr.exclude").remove();
     });
     $("#message_txt").append(rendered);
   });
