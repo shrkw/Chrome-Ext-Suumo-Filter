@@ -1,0 +1,23 @@
+{
+  "name": "chrome-ext-suumo-filter",
+  "description": "",
+  "main": "gulpfile.babel.js",
+  "authors": [
+    "Hiroyuki Shirakawa"
+  ],
+  "license": "MIT License",
+  "homepage": "https://github.com/shrkw/Chrome-Ext-Suumo-Filter",
+  "moduleType": [
+    "es6"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
