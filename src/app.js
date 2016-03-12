@@ -1,3 +1,5 @@
+import * as lib from './mylib'
+
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   for (var key in changes) {
     var storageChange = changes[key];
@@ -6,7 +8,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   }
 });
 
-const reduceAttention = () => {
+function reduceAttention() {
   console.log('do something for reducing attention');
   chrome.storage.local.get('excluding', (ret)=> {
     const exc = ret.excluding;
@@ -26,19 +28,7 @@ const reduceAttention = () => {
   });
 }
 
-const addExcludingWord = (word) => {
-  chrome.storage.local.get('excluding', (ret)=> {
-    const exc = ret.excluding;
-    let set = new Set(exc);
-    const val = window.prompt("除外対象に追加する文字列を入力してください", word);
-    set.add(val);
-    console.log(set);
-    const trans = [...set];
-    chrome.storage.local.set({'excluding': trans}, ()=> { });
-  });
-}
-
-const insertButtons = () => {
+function insertButtons() {
   let clearButton = $('div#js-pageTop').append("<button class='shrkw-clear'>Clear</button>");
   clearButton.on("click", ()=> {chrome.storage.local.clear(()=> {console.log('cleared');})})
 
@@ -47,9 +37,8 @@ const insertButtons = () => {
     e.preventDefault();
     console.log(e);
     var title_a = $(e.target).closest("div.property_unit").find("div.property_unit-header h2 a");
-    addExcludingWord(title_a.html());
+    lib.addExcludingWord(title_a.html());
   });
-
 }
 
 insertButtons();
