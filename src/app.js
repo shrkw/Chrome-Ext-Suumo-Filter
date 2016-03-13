@@ -12,18 +12,18 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 function reduceAttention() {
   chrome.storage.local.get('excluding', (ret)=> {
     const exc = ret.excluding;
-    let set = new Set(exc);
-
     $("div.property_unit").each((index, elem)=> {
       let unit = $(elem);
       const title = unit.find("div.property_unit-header h2 a").html();
-      set.forEach((val)=> {
+      const found = exc.some((val)=> {
         if (title.indexOf(val) != -1) {
           unit.addClass("shrkw-hide");
-        } else {
-          unit.removeClass("shrkw-hide");
+          return true;
         }
       });
+      if (!found) {
+        unit.removeClass("shrkw-hide");
+      }
     });
   });
 }
