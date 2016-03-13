@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <!-- build:css styles/popup-vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link href="resources/popup.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <div>
+      <div>除外表示登録された文字列のリストです</div>
+      <table id="message_txt">
+        <tr><th></th><th></th></tr>
+      </table>
+    </div>
+
+    <!-- build:js scripts/popup-vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- inject:js -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <script id="tmpl" type="x-tmpl-mustache">
+      <tr class="exclude"><td class="value">{{value}}</td><td class="action"><button data-val="{{value}}">削除</button></td></tr>
+    </script>
+    <!-- build:js scripts/popup.js -->
+    <script src="popup.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>

@@ -3,6 +3,8 @@ import util from 'gulp-util'
 import babel from 'gulp-babel'
 import zip from 'gulp-zip'
 import plumber from "gulp-plumber"
+import inject from 'gulp-inject'
+import mainBowerFiles from 'main-bower-files'
 import del from 'del'
 import fs from 'fs'
 import browserify from "browserify"
@@ -69,10 +71,26 @@ gulp.task('resources', () => {
     .pipe(gulp.dest(`${path_map.dest_dir}/resources`));
 });
 
+gulp.task('vendor', () => {
+    gulp.src(mainBowerFiles())
+    .pipe(gulp.dest(`${path_map.dest_dir}/vendor`));
+});
+
+gulp.task('inject', ['vendor'], () => {
+  gulp.src('src/popup.html')
+    .pipe(inject(gulp.src(mainBowerFiles()), {
+      transform: (filepath, file, index, length, targetFile) => {
+        return inject.transform(`../vendor/${file.relative}`);
+      }
+    }))
+    .pipe(gulp.dest(path_map.dest_dir));
+})
+
 gulp.task('clean', () => {
+  // due to prevent 'Error: EEXIST: file already exists'
   del.sync(['dist/**/*']);
 });
-  // due to prevent 'Error: EEXIST: file already exists'
+
 gulp.task('pack', () => {
   runSequence('clean',
     'build',
@@ -90,6 +108,6 @@ gulp.task('watch', () => {
   gulp.watch(['src/**/*', 'resources/**/*'], ['build']);
 });
 
-gulp.task('build', ['babelify', 'manifest', 'resources']);
+gulp.task('build', ['babelify', 'manifest', 'resources', 'inject']);
 
 gulp.task('default', ['watch', 'build']);

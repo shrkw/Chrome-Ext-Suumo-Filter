@@ -11,11 +11,13 @@
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.1",
+    "gulp-inject": "^3.0.0",
     "gulp-json-editor": "^2.2.1",
     "gulp-plumber": "^1.1.0",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
     "jquery": "^2.2.1",
+    "main-bower-files": "^2.11.1",
     "mustache": "^2.2.1",
     "run-sequence": "^1.1.5",
     "through2": "^2.0.1"

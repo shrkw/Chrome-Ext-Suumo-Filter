@@ -17,7 +17,7 @@
       "19": "resources/don_19.png",
       "38": "resources/don_38.png"
     },
-    "default_popup": "resources/popup.html"
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
