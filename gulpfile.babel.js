@@ -72,16 +72,17 @@ gulp.task('resources', () => {
     .pipe(gulp.dest(`${path_map.dest_dir}/resources`));
 });
 
-gulp.task('vendor', () => {
+gulp.task('vendor', (cb) => {
     gulp.src(mainBowerFiles())
     .pipe(gulp.dest(`${path_map.dest_dir}/vendor`));
+    cb();
 });
 
 gulp.task('inject', ['vendor'], () => {
-  gulp.src('src/popup.html')
+  gulp.src('src/**/*.html')
     .pipe(inject(gulp.src(mainBowerFiles()), {
       transform: (filepath, file, index, length, targetFile) => {
-        return inject.transform(`../vendor/${file.relative}`);
+        return inject.transform(`./vendor/${file.relative}`);
       }
     }))
     .pipe(gulp.dest(path_map.dest_dir));
@@ -101,14 +102,15 @@ gulp.task('clean', () => {
   del.sync(['dist/**/*']);
 });
 
-gulp.task('pack', () => {
+// FIXME: does not work correct order
+gulp.task('pack', (cb) => {
   runSequence('clean',
     'build',
-    'zip'
-  );
+    'zip',
+    cb);
 });
 
-gulp.task('zip', ['build'], function (cb) {
+gulp.task('zip', function (cb) {
   return gulp.src('dist/**/*')
       .pipe(zip(`${name}-${version}.zip`))
       .pipe(gulp.dest('build'));

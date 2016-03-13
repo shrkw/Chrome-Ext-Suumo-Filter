@@ -1,5 +1,13 @@
 {
-  "name": "chrome-ext-suumo-filter",
+  "name": "スーモ中古マンション表示フィルター",
+  "description": "",
+  "version": "0.0.2",
+  "main": "gulpfile.babel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hiroyuki Shirakawa",
+  "license": "MIT License",
   "dependencies": {},
   "devDependencies": {
     "babel": "^6.3.26",
@@ -22,13 +30,5 @@
     "mustache": "^2.2.1",
     "run-sequence": "^1.1.5",
     "through2": "^2.0.1"
-  },
-  "description": "",
-  "version": "0.0.2",
-  "main": "gulpfile.babel.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Hiroyuki Shirakawa",
-  "license": "MIT License"
+  }
 }

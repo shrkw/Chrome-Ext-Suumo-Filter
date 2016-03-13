@@ -12,6 +12,7 @@
     "storage",
     "http://suumo.jp/*"
   ],
+  "options_page": "options.html",
   "browser_action": {
     "default_icon": {
       "19": "resources/don_19.png",
