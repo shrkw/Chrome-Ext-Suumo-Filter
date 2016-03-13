@@ -12,6 +12,7 @@ import babelify from "babelify"
 import through2 from 'through2'
 import jeditor from 'gulp-json-editor'
 import runSequence from 'run-sequence'
+import webserver from 'gulp-webserver'
 // import rename from 'gulp-rename'
 // import uglify from 'gulp-uglify'
 
@@ -84,7 +85,16 @@ gulp.task('inject', ['vendor'], () => {
       }
     }))
     .pipe(gulp.dest(path_map.dest_dir));
-})
+});
+
+gulp.task('webserver', () => {
+  gulp.src('dist')
+    .pipe(webserver({
+      livereload: true,
+      open: true
+    }));
+});
+gulp.task('watch-webserver', ['watch', 'webserver']);
 
 gulp.task('clean', () => {
   // due to prevent 'Error: EEXIST: file already exists'
