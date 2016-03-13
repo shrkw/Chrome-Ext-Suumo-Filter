@@ -2,7 +2,3 @@ body {
   min-width: 400px;
   overflow-x: hidden;
 }
-
-td.value {
-  width: 350px;
-}
