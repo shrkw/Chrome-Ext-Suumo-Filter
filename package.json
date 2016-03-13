@@ -1,7 +1,7 @@
 {
   "name": "スーモ中古マンション表示フィルター",
   "description": "",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "gulpfile.babel.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,7 @@
     "gulp-inject": "^3.0.0",
     "gulp-json-editor": "^2.2.1",
     "gulp-plumber": "^1.1.0",
+    "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1",
     "gulp-zip": "^3.2.0",

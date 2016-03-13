@@ -13,8 +13,8 @@ import through2 from 'through2'
 import jeditor from 'gulp-json-editor'
 import runSequence from 'run-sequence'
 import webserver from 'gulp-webserver'
+import uglify from 'gulp-uglify'
 // import rename from 'gulp-rename'
-// import uglify from 'gulp-uglify'
 
 const path_map = {
   dest_dir: './dist/',
@@ -45,6 +45,7 @@ gulp.task('babelify', () => {
         );
       });
     }))
+    .pipe(uglify())
     .pipe(gulp.dest(path_map.dest_dir));
 });
 
@@ -63,7 +64,10 @@ gulp.task('babel', () => {
 
 gulp.task('manifest', () => {
   return gulp.src('src/manifest.json')
-    .pipe(jeditor({ version: version }))
+    .pipe(jeditor({
+      version: version,
+      name: name
+    }))
     .pipe(gulp.dest(path_map.dest_dir));
 });
 
