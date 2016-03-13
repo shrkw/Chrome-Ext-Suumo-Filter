@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Suumo Properties Filter",
+  "short_name": "スーモフィルター",
   "description": "Filter properties you do not want to see.",
   "version": "0.0.1",
   "icons": {
