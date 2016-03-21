@@ -29,9 +29,6 @@ function reduceAttention() {
 }
 
 function insertButtons() {
-  let clearButton = $('div#js-pageTop').append("<button class='shrkw-clear'>Clear</button>");
-  clearButton.on("click", ()=> {chrome.storage.local.clear(()=> {console.log('cleared');})})
-
   $("input.js-clipkey").after("<button class='shrkw-excluding'>Exc</button>");
   $("button.shrkw-excluding").on("click", (e)=> {
     e.preventDefault();
